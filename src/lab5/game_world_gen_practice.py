@@ -47,6 +47,40 @@ if __name__ == "__main__":
 
     ''' Setup cities and routes in here'''
 
+    X_Location = []
+    Y_Location = []
+
+    i = 0
+
+    while True:
+        if i < len(city_names):
+            X_Location.append(random.randint(0,100))
+        else:
+            break
+        i = i + 1
+
+    j = 0
+
+    while True:
+        if j < len(city_names):
+            Y_Location.append(random.randint(0,200))
+        else:
+            break
+        j = j + 1
+
+
+    city_locations = [(X_Location[i], Y_Location[i]) for i in range(0, len(X_Location))]
+
+    #the routes
+    route_start = 0
+    route_end = 0
+
+    route_start = random.randint(0,9)
+    route_end = random.randint(0,9)
+
+    routes = (city_locations[route_start], city_locations[route_end])
+
+
     city_locations_dict = {name: location for name, location in zip(city_names, city_locations)}
     random.shuffle(routes)
     routes = routes[:10] 
@@ -60,7 +94,9 @@ if __name__ == "__main__":
         screen.blit(pygame_surface, (0, 0))
 
         ''' draw cities '''
+        pygame.draw.polygon(landscape)
 
         ''' draw first 10 routes '''
+        pygame.draw.lines(landscape)
 
         pygame.display.flip()
