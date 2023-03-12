@@ -13,6 +13,7 @@ fulfilled. Clearly explain in comments which line of code and variables are used
 import matplotlib.pyplot as plt
 import pygad
 import numpy as np
+from perlin_noise import PerlinNoise
 
 import sys
 from pathlib import Path
@@ -20,16 +21,44 @@ from pathlib import Path
 sys.path.append(str((Path(__file__) / ".." / ".." / "..").resolve().absolute()))
 
 from src.lab5.landscape import elevation_to_rgba
+from src.lab5.landscape import get_elevation
 
 
 def game_fitness(cities, idx, elevation, size):
     fitness = 0.0001  # Do not return a fitness of 0, it will mess up the algorithm.
+
     """
     Create your fitness function here to fulfill the following criteria:
     1. The cities should not be under water
     2. The cities should have a realistic distribution across the landscape
     3. The cities may also not be on top of mountains or on top of each other
     """
+
+    #iterate through every city and split the cordinates
+    for i in range(len(cities)):
+        city_x = (cities[i]//100)
+        city_y = (cities[i] % 100)
+
+        #Check to see if the elevation / max elevation (250) is between .55 and .6 (Any higher is considered mountain)
+        if elevation[city_x][city_y] >= .55 and elevation[city_x][city_y] < .60:
+            fitness += (elevation[city_x][city_y])
+
+        #Check to see if the elevation / max is between .55 and .5 (anything lower is considered under water)
+        elif elevation[city_x][city_y] < .55 and elevation[city_x][city_y] > .50:
+            fitness += (1 - (elevation[i][city_y]))
+
+        #If it is not between the numbers above, then the city is on a mountain or underwater and will recieve bad fitness
+        else:
+            fitness += .0001
+
+
+    #if two cities overlap give a bad fitness value and override the old value given above
+    for i in range(len(cities)):
+        for j in range(len(cities)):
+            if cities[i] == cities[j] and i != j:
+                return .0001
+
+
     return fitness
 
 
@@ -116,7 +145,8 @@ if __name__ == "__main__":
     elevation = []
     """ initialize elevation here from your previous code"""
     # normalize landscape
-    elevation = np.array(elevation)
+    noise = PerlinNoise(octaves=1)
+    elevation = get_elevation(size)
     elevation = (elevation - elevation.min()) / (elevation.max() - elevation.min())
     landscape_pic = elevation_to_rgba(elevation)
 
