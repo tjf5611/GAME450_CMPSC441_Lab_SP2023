@@ -7,10 +7,11 @@ You can usually improve the model by normalizing the input data. Try that and se
 from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn import preprocessing
 import pandas as pd
 import numpy as np
 
-data = pd.read_csv("src/lab8/heart.csv")
+data = pd.read_csv("src/lab10/heart.csv")
 
 # Transform the categorical variables into dummy variables.
 print(data.head())
@@ -26,12 +27,24 @@ x_train, x_test, y_train, y_test = train_test_split(
 
 """ Train a sklearn model here. """
 
-sklearn_model = None
+sklearn_model = KNeighborsClassifier(n_neighbors=3)
+sklearn_model.fit(x_train,y_train)
+
 
 # Accuracy
 print("Accuracy of model: {}\n".format(sklearn_model.score(x_test, y_test)))
 
 
 """ Improve the model by normalizing the input data. """
+
+normalized = preprocessing.MinMaxScaler()
+
+
+result = normalized.fit_transform(x_train)
+x_test = normalized.fit_transform(x_test)
+#Scaled_x = pd.DataFrame(result, columns=col)
+
+sklearn_model.fit(result,y_train)
+
 
 print("Accuracy of improved model: {}\n".format(sklearn_model.score(x_test, y_test)))
