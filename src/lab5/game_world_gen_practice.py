@@ -47,29 +47,7 @@ if __name__ == "__main__":
 
     ''' Setup cities and routes in here'''
 
-    X_Location = []
-    Y_Location = []
-
-    i = 0
-
-    while True:
-        if i < len(city_names):
-            X_Location.append(random.randint(0,100))
-        else:
-            break
-        i = i + 1
-
-    j = 0
-
-    while True:
-        if j < len(city_names):
-            Y_Location.append(random.randint(0,200))
-        else:
-            break
-        j = j + 1
-
-
-    city_locations = [(X_Location[i], Y_Location[i]) for i in range(0, len(X_Location))]
+    city_locations = [(random.randint(0,100), random.randint(0,200)) for i in range(0, len(city_names))]
 
     #the routes
     route_start = 0

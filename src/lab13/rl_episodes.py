@@ -76,14 +76,25 @@ def run_episodes(n_episodes):
             burke['classrooms']['BURKE001']
             burke['classrooms']['BURKE001']['projector', 'chairs', 'desks']
             burke['classrooms']['BURKE002']['projector', 'chairs', 'desks']
+
     '''
+    names = ["Legolas", "Saruman"]
+    player1 = PyGamePolicyCombatPlayer(names[0], test_policy)
+    player2 = PyGameRandomCombatPlayer(names[1])
+    
+
+    episode = run_random_episode(player1, player2)
     action_values = {}
-    action_values['state']['action']
+    action_values[episode[0]][episode[1]] = {}
 
     for _ in n_episodes:
-        run_random_episode(player, opponent)
+        action_values[episode[0]][episode[1]].append(episode[2])
+        episode = run_random_episode(player1, player2)
+    
 
-    get_history_returns
+    total = get_history_returns(action_values)
+
+    action_values[episode[0]] = total/n_episodes
 
     return action_values
 

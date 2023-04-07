@@ -23,11 +23,11 @@ sys.path.append(str((Path(__file__) / ".." / "..").resolve().absolute()))
 
 def run_episode(player1, player2):
     episode = []
-    player1 = CombatPlayer("Player 1")
-    player2 = CombatPlayer("Player 2")
     currentGame = Combat()
     observation = (player1.health, player2.health)
     action = PyGameComputerCombatPlayer.weapon_selecting_strategy(player1)
+
+
 
     reward = run_turn(currentGame, player1, player2)
 
