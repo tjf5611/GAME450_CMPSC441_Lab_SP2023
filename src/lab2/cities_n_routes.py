@@ -21,6 +21,10 @@ def get_randomly_spread_cities(size, n_cities):
     xpix, ypix = size
     City_Locations = [(random.randint(0,xpix), random.randint(0,ypix)) for i in range(0, n_cities)]
 
+    #xpix, ypix = size
+
+    #return [((random.randint(0,xpix), random.randint(0,ypix)) for i in n_cities)]
+
     return City_Locations
 
 def get_routes(city_names):

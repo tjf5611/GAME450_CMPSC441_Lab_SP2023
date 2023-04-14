@@ -1,6 +1,6 @@
 ''' 
 Lab 12: Beginnings of Reinforcement Learning
-We will modularize the code in pygame_combat.py from lab 11 together.
+We will modularize the code in pygrame_combat.py from lab 11 together.
 
 Then it's your turn!
 Create a function called run_episode that takes in two players
@@ -11,7 +11,6 @@ Note that observation/state is a tuple of the form (player1_health, player2_heal
 Action is simply the weapon selected by the player.
 Reward is the reward for the player for that turn.
 '''
-
 import sys
 import pygame
 from pathlib import Path
@@ -24,12 +23,12 @@ sys.path.append(str((Path(__file__) / ".." / "..").resolve().absolute()))
 def run_episode(player1, player2):
     episode = []
     currentGame = Combat()
+    print(currentGame)
     observation = (player1.health, player2.health)
     action = PyGameComputerCombatPlayer.weapon_selecting_strategy(player1)
 
-
-
-    reward = run_turn(currentGame, player1, player2)
+    #reward = run_turn(currentGame, player1, player2)
+    reward = 1
 
     turn = (observation, action, reward)
 

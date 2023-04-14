@@ -58,7 +58,9 @@ def get_history_returns(history):
     for i, (state, action, reward) in enumerate(history):
         if state not in returns:
             returns[state] = {}
-        returns[state][action] = sum([reward for _, _, reward in history[i:]])
+        returns[state][action] = total_return - sum(
+            [reward for _, _, reward in history[:i]]
+        )
     return returns
 
 
@@ -76,22 +78,22 @@ def run_episodes(n_episodes):
             burke['classrooms']['BURKE001']
             burke['classrooms']['BURKE001']['projector', 'chairs', 'desks']
             burke['classrooms']['BURKE002']['projector', 'chairs', 'desks']
-
     '''
+
     names = ["Legolas", "Saruman"]
-    player1 = PyGamePolicyCombatPlayer(names[0], test_policy)
+    player1 = PyGameRandomCombatPlayer(names[0])
     player2 = PyGameRandomCombatPlayer(names[1])
     
-
     episode = run_random_episode(player1, player2)
+    print(episode[0])
     action_values = {}
-    action_values[episode[0]][episode[1]] = {}
+    action_values = [{"health": [{"weapon": [{"reward": []}]}]}]
 
-    for _ in n_episodes:
-        action_values[episode[0]][episode[1]].append(episode[2])
+
+    for i in range(n_episodes):
         episode = run_random_episode(player1, player2)
+        action_values(["health"][0]).append(str(episode[i][0]))
     
-
     total = get_history_returns(action_values)
 
     action_values[episode[0]] = total/n_episodes
