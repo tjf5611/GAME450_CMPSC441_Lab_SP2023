@@ -82,17 +82,22 @@ def run_episodes(n_episodes):
 
     names = ["Legolas", "Saruman"]
     player1 = PyGameRandomCombatPlayer(names[0])
-    player2 = PyGameRandomCombatPlayer(names[1])
+    player2 = PyGameComputerCombatPlayer(names[1])
     
     episode = run_random_episode(player1, player2)
     print(episode[0])
     action_values = {}
-    action_values = [{"health": [{"weapon": [{"reward": []}]}]}]
+    action_values = {(10,10): {0: {1: {}}}}
 
+    n_episodes = 100
 
     for i in range(n_episodes):
         episode = run_random_episode(player1, player2)
-        action_values(["health"][0]).append(str(episode[i][0]))
+        action_values[(episode[0][0])] = {}
+        action_values[(episode[0][0])][(episode[0][1])]={}
+        action_values[(episode[0][0])][(episode[0][1])][episode[0][2]] = episode[0][2]
+
+
     
     total = get_history_returns(action_values)
 
