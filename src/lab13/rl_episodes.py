@@ -83,25 +83,27 @@ def run_episodes(n_episodes):
     names = ["Legolas", "Saruman"]
     player1 = PyGameRandomCombatPlayer(names[0])
     player2 = PyGameComputerCombatPlayer(names[1])
-    
+    player1.weapon= PyGameRandomCombatPlayer.weapon_selecting_strategy(player1)
+    player2.weapon= PyGameComputerCombatPlayer.weapon_selecting_strategy(player2)
+    print(player1.weapon)
+    print(player2.weapon)
+
+    temp = 0
+
     episode = run_random_episode(player1, player2)
     print(episode[0])
-    action_values = {}
-    action_values = {(10,10): {0: {1: {}}}}
-
-    n_episodes = 100
+    action_values = {episode[0][0]: {0: temp, 1:temp, 2: temp}}
+    
+    #n_episodes = 100
 
     for i in range(n_episodes):
+        print(i)
+        player1.weapon= PyGameRandomCombatPlayer.weapon_selecting_strategy(player1)
+        player2.weapon= PyGameComputerCombatPlayer.weapon_selecting_strategy(player2)
         episode = run_random_episode(player1, player2)
-        action_values[(episode[0][0])] = {}
-        action_values[(episode[0][0])][(episode[0][1])]={}
-        action_values[(episode[0][0])][(episode[0][1])][episode[0][2]] = episode[0][2]
-
-
-    
-    total = get_history_returns(action_values)
-
-    action_values[episode[0]] = total/n_episodes
+        if episode[0][0] not in action_values:
+            action_values[episode[0][0]] = {}
+        action_values[episode[0][0]].update({episode[0][1]: episode[0][2]})
 
     return action_values
 

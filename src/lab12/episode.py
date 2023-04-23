@@ -16,6 +16,7 @@ import pygame
 from pathlib import Path
 from lab11.pygame_combat import run_turn, draw_combat_on_window, PyGameComputerCombatPlayer
 from lab11.turn_combat import CombatPlayer, Combat
+import random
 
 sys.path.append(str((Path(__file__) / ".." / "..").resolve().absolute()))
 
@@ -23,12 +24,11 @@ sys.path.append(str((Path(__file__) / ".." / "..").resolve().absolute()))
 def run_episode(player1, player2):
     episode = []
     currentGame = Combat()
-    print(currentGame)
     observation = (player1.health, player2.health)
-    action = PyGameComputerCombatPlayer.weapon_selecting_strategy(player1)
+    action = player1.weapon
 
-    #reward = run_turn(currentGame, player1, player2)
-    reward = 1
+    reward = run_turn(currentGame, player1, player2)
+
 
     turn = (observation, action, reward)
 
