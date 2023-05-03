@@ -6,6 +6,7 @@ from pygame_combat import run_pygame_combat
 from pygame_human_player import PyGameHumanPlayer
 from landscape import get_landscape, get_combat_bg
 from pygame_ai_player import PyGameAIPlayer
+from conversation import display_dialogue
 
 from pathlib import Path
 
@@ -100,7 +101,6 @@ if __name__ == "__main__":
 
     """ Add a line below that will reset the player variable to 
     a new object of PyGameAIPlayer class."""
-
     player = PyGameAIPlayer()
 
     state = State(
@@ -140,6 +140,7 @@ if __name__ == "__main__":
             state.encounter_event = random.randint(0, 1000) < 2
             if not state.travelling:
                 print('Arrived at', state.destination_city)
+                display_dialogue()
 
         if not state.travelling:
             encounter_event = False

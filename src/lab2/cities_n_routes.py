@@ -5,7 +5,7 @@ In the final project, you will need a bunch of cities spread across a map. Here 
 will generate a bunch of cities and all possible routes between them.
 '''
 import random
-import itertools
+from itertools import combinations
 
 def get_randomly_spread_cities(size, n_cities):
     """
@@ -18,7 +18,13 @@ def get_randomly_spread_cities(size, n_cities):
     :return: A list of cities with random x and y coordinates.
     """
     # Consider the condition where x size and y size are different
-    pass
+    cities = []
+    
+    for i in range(n_cities):
+        coord = (random.randint(0, size[0]), random.randint(0, size[1]))
+        cities.append(coord)
+
+    return cities
 
 def get_routes(city_names):
     """
@@ -29,7 +35,13 @@ def get_routes(city_names):
     :return: A list of tuples representing all possible links between cities/ pairs of cities, 
             each item in the list (a link) represents a route between two cities.
     """
-    pass
+    city_len = len(city_names)
+    coords = []
+    for i in range(city_len):
+        coords = list(combinations(city_names,2))
+
+    print(coords)
+    return coords
 
 
 # TODO: Fix variable names
