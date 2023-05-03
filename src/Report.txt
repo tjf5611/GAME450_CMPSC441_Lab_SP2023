@@ -1,0 +1,51 @@
+Abstract:
+  The goal for this game is to create and fun and engaging game that will challenge that player to explore the firrent cities that generate around the map. They will also be tasked with surviving bandit attacks while they make their way to their destined city. The player will be able to control an elf character named Legolas and navigate through the generated map. Instead of a human player, the player in this project will be an AI player that will play through the game as intended. 
+    The game itself was developed using the python library Pygame and the player will be able to move from city to city due to this library. The player will only be able to move from one city to another if there is a route from the city they are at to the city they want to arrive at. As the player moves from one city to another, there will be a chance for the player to engage in a random battle with a bandit. The battle will mimic a rock paper scissors style of game. 
+    The AI created player will be created and implemented using reinforced algorithms. This means that the AI player will be changing its policy of attack based off the health of the bandit. The movement of the player will also take money and if the player does not have enough money while moving from one city to another, the game will end and the player will lose. The player can earn money by defeating bandits. 
+    
+    
+    
+AI:
+1. AI Combat
+2. AI Movement from one city to another
+3. AI locals dialog
+
+
+
+Solved:
+  The movement for the AI player was created using the random library. Even though a human player will be able to select which city they wish to go to, the AI player will select a random city. The AI will select a number 0-9 to "decide" which city to go to next. The problem then was to find out if the randomly selected city shared a route with the city the AI player was currently at. This means that there should be a system that checks the selected route with the routes available to see if that route exists in the game. And of course, if the route does not exist, the AI player will have to select a different existing route for them to be able to travel. 
+  The combat of the game was made using reinforced learning and will change its actions based off of the health of the enemy bandit they are facing. The bandits in this game have a very linear attack policy which fully depends on their health, so using reinforcement learning, the AI player will create its own policy by learning the bandit's policy. The player will be able to select three options to attack with Arrow (a), Sword (s), and Fire (f). Like said previously, this combat is a mimicry of rock paper scissors and the bandits that you will be facing will also be able to do the same three moves. 
+  The final aspect of the game is that there will be text that shows up to the player representing a local of the city welcoming them to their city. This will give the player an idea that there is more in the game than themselves and bandits. The python code uses the random function to randomly select phrases from a dictionary.
+
+
+Appendix:
+
+we created a game using Python that let's you play as an elf who travels to different cities.  how could i make it so that the locals talk to the player 
+
+ChatGPT
+To make the locals talk to the player in your game, you could implement a dialogue system. Here are some steps you could follow to do this:
+
+Define a set of phrases that the locals can say to the player. These could be stored in a list or a dictionary.
+
+When the player enters a city, randomly select a phrase from the list of phrases for the locals in that city. You could use the random module in Python to do this.
+
+Display the selected phrase to the player on the screen.
+
+Optionally, you could also allow the player to respond to the locals using a set of pre-defined responses. This could add another layer of interactivity to your game.
+
+Here is an example of how you could implement a basic dialogue system in Python:
+
+python
+Copy code
+import random
+
+city_phrases = {
+    "New York": ["Welcome to New York!", "What brings you to our city?", "Have you tried our famous pizza?"],
+    "Paris": ["Bonjour! Welcome to Paris.", "The Eiffel Tower is a must-see.", "Would you like to try some croissants?"],
+    "Tokyo": ["Konnichiwa! Welcome to Tokyo.", "The city is famous for its sushi.", "Have you visited the Tokyo Tower yet?"],
+}
+
+def display_dialogue(city):
+    phrases = city_phrases[city]
+    phrase = random.choice(phrases)
+    print(phrase)
